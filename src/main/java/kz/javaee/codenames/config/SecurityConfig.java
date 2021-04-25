@@ -52,7 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests().
                 antMatchers("/auth").permitAll().
                 antMatchers("/api/register").permitAll().
-                anyRequest().authenticated().and().
+                antMatchers("/app/hello").permitAll().
+                antMatchers("/topic/greetings").permitAll().
+                antMatchers("/gs-guide-websocket/*").permitAll().
+                anyRequest().permitAll().and().
                 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().
                 sessionManagement().
                 sessionCreationPolicy(SessionCreationPolicy.STATELESS);
