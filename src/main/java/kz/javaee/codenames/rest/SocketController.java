@@ -1,7 +1,6 @@
 package kz.javaee.codenames.rest;
 
 import kz.javaee.codenames.dto.MessageDto;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -12,11 +11,17 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class SocketController {
 
     @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
+    @SendTo("/game-broadcaster")
     public MessageDto getMessageDto(MessageDto messageDto) throws Exception {
         Thread.sleep(1000);
         System.out.println(messageDto.getName());
         return new MessageDto("server", "server says yay");
+    }
+
+    @MessageMapping("/update-config")
+    @SendTo("/game-broadcaster")
+    public MessageDto updateGameBoardConfig(MessageDto messageDto) {
+        return messageDto;
     }
 
 }
