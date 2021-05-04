@@ -3,6 +3,7 @@ package kz.javaee.codenames.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -19,6 +20,10 @@ public class GameRoom {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "config")
+    @Type(type = "text")
+    private String config;
 
     @Column(name = "max_number_of_players", nullable = false)
     private String maxNumberOfPlayers;

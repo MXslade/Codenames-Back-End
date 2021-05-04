@@ -9,12 +9,8 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageDto implements Serializable {
+public class GameRoomDto implements Serializable {
 
-    private String gameRoomId;
-
-    private String users;
-
-    private String config;
+    private Long id;
 
 }
