@@ -1,18 +1,14 @@
 package kz.javaee.codenames.rest;
 
-import javassist.Loader;
 import kz.javaee.codenames.dto.MessageDto;
 import kz.javaee.codenames.models.GameRoom;
 import kz.javaee.codenames.services.GameRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:3000")
@@ -34,8 +30,9 @@ public class SocketController {
                                             MessageDto messageDto) {
         Long id = Long.parseLong(messageDto.getGameRoomId());
         GameRoom gameRoom = gameRoomService.getGameRoomById(id);
-        if (gameRoom != null && (gameRoom.getConfig() == null ||  !gameRoom.getConfig().equals(messageDto.getConfig()))) {
+        if (gameRoom != null) {
             gameRoom.setConfig(messageDto.getConfig());
+            gameRoomService.updateGameRoom(gameRoom);
         }
 
         return new MessageDto(gameRoom.getId().toString(), "", gameRoom.getConfig());

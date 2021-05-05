@@ -66,4 +66,13 @@ public class MainController {
         return ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("/game-room/{gameRoomId}")
+    public ResponseEntity<?> getGameRoom(@PathVariable(name = "gameRoomId") Long gameRoomId) {
+        GameRoom gameRoom = gameRoomService.getGameRoomById(gameRoomId);
+        if (gameRoom != null) {
+            return ResponseEntity.ok(gameRoom);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 }
