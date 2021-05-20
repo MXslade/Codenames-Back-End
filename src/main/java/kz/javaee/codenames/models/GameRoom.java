@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "game_room")
@@ -33,5 +34,8 @@ public class GameRoom {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<User> users;
 
 }

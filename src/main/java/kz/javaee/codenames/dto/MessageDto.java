@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +14,7 @@ public class MessageDto implements Serializable {
 
     private String gameRoomId;
 
-    private String users;
+    private List<Long> userIds;
 
     private String config;
 
