@@ -57,9 +57,19 @@ public class MainController {
 
     @PostMapping("/game-rooms")
     public ResponseEntity<?> createGameRoom(@RequestBody GameRoom gameRoom) {
+        // Here I need to generate config
+        // basically, it should be this way
+        // reds nad blues are gonna be empty
+        // board gonna be generated
+        // depending on board, we should decide who has the first turn
+        // redsCap and bluesCap are null
+        // gameStarted is false
+        // Result, Generated hecking MessageDto and transform it to the json object and write it down as config for the game
         GameRoom result = gameRoomService.createGameRoom(gameRoom);
 
         if (result != null) {
+            result.setConfig(gameRoomService.generateConfigForGameRoom(result.getId()));
+            result = gameRoomService.updateGameRoom(result);
             return ResponseEntity.ok(result);
         }
 

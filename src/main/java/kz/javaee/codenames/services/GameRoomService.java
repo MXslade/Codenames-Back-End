@@ -16,4 +16,6 @@ public interface GameRoomService {
 
     GameRoom deleteGameRoom(GameRoom gameRoom);
 
+    String generateConfigForGameRoom(Long gameRoomId);
+
 }
