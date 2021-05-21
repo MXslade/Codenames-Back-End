@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -83,6 +84,15 @@ public class MainController {
             return ResponseEntity.ok(gameRoom);
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/users")
+    public ResponseEntity<?> getUsersByIds(@RequestBody List<Long> userIds) {
+        List<User> users = new ArrayList<>();
+        userIds.forEach(userId -> {
+            users.add(userService.getUserById(userId));
+        });
+        return ResponseEntity.ok(users);
     }
 
 }
